@@ -1,0 +1,51 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: A simple API Gateway 
+host: www.api.com:8000
+basePath: /user-order/v1/
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /bookTo:
+    x-swagger-router-controller: ServiceController
+    x-ID: "001"
+    x-name: "airlineBookTo"
+    get:
+      description: 预订往航班机票
+      deprecated: false
+      operationId: airlineBookTo
+      parameters:
+        - name: isBuy
+          in: query
+          description: 机票购买是否成功，true为成功，false为失败
+          required: false
+          type: boolean
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ServiceResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+definitions:
+  ServiceResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string

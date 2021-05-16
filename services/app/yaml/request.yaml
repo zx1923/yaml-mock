@@ -1,0 +1,119 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: A simple API Gateway 
+host: www.api.com:8000
+basePath: /app/v1/
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /bookTo:
+    x-swagger-router-controller: ServiceController
+    x-ID: "001"
+    x-name: "airlineBookTo"
+    get:
+      description: 预订往航班机票
+      deprecated: false
+      operationId: airlineBookTo
+      parameters:
+        - name: isBuy
+          in: query
+          description: 机票购买是否成功，true为成功，false为失败
+          required: false
+          type: boolean
+      responses:
+        "200":
+          description: Success
+          properties:
+            msg:
+              type: string
+            child:
+              properties:
+                child_msg:
+                  type: string
+            result:
+              schema:
+                $ref: "#/definitions/ServiceResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /estimates/price:
+    get:
+      summary: Price Estimates
+      description: The Price Estimates endpoint returns an estimated price range for each product offered at a given location. The price estimate is provided as a formatted string with the full price range and the localized currency symbol.<br><br>The response also includes low and high estimates, and the [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for situations requiring currency conversion. When surge is active for a particular product, its surge_multiplier will be greater than 1, but the price estimate already factors in this multiplier.
+      parameters:
+        - name: start_latitude
+          in: query
+          description: Latitude component of start location.
+          required: true
+          schema:
+            type: number
+            format: double
+        - name: start_longitude
+          in: query
+          description: Longitude component of start location.
+          required: true
+          schema:
+            type: number
+            format: double
+        - name: end_latitude
+          in: query
+          description: Latitude component of end location.
+          required: true
+          schema:
+            type: number
+            format: double
+        - name: end_longitude
+          in: query
+          description: Longitude component of end location.
+          required: true
+          schema:
+            type: number
+            format: double
+      tags: 
+        - Estimates
+      responses:  
+        '200':
+          description: An array of price estimates by product
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/PriceEstimate"
+# complex objects have schema definitions
+definitions:
+  ServiceResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+        default: hello wolrd
+      data:
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/PriceEstimate"
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  PriceEstimate:
+    properties:
+      display_name:
+        type: string
+        description: Display name of product.
+      low_estimate:
+        type: number
+        enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+        description: Lower bound of the estimated price.
+      
