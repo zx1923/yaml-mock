@@ -11,6 +11,9 @@ module.exports = {
       'options'
     ]
   },
+  log: {
+    level: '*'
+  },
   services: [
     'user-order'
   ],
