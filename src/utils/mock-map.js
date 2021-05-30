@@ -8,16 +8,16 @@ const { Random } = require("mockjs");
  * @returns 默认值，或枚举值中的任意一个
  */
 Random.oneOf = function (enumbase = [], defaultValue = null) {
-    if (defaultValue !== null) return defaultValue;
-    let i = Random.integer(0, enumbase.length - 1);
-    return enumbase[i];
+  if (defaultValue !== null) return defaultValue;
+  let i = Random.integer(0, enumbase.length - 1);
+  return enumbase[i];
 }
 
 module.exports = {
-    'string': Random.string.bind(Random),
-    'integer': Random.integer.bind(Random),
-    'number': Random.float.bind(Random),
-    'date': Random.date.bind(Random),
-    'boolean': Random.boolean.bind(Random),
-    'enum': Random.oneOf.bind(Random),
+  'string': Random.string.bind(Random),
+  'integer': Random.integer.bind(Random),
+  'number': Random.float.bind(Random),
+  'date': Random.date.bind(Random),
+  'boolean': Random.boolean.bind(Random),
+  'enum': Random.oneOf.bind(Random),
 }

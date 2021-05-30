@@ -2,9 +2,9 @@
   "name": "yaml-mock",
   "version": "0.0.1",
   "description": "Swagger Yaml 快速 Mock 工具",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node main.js",
+    "start": "node start.js",
     "test": "jest"
   },
   "dependencies": {

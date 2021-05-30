@@ -11,6 +11,9 @@ const logger = new Logger('Mock');
  * @returns 
  */
 function _mockResponse(repdefine = {}) {
+  if (!repdefine.type) {
+    return mockMap.string();
+  }
   // 如果有默认值，直接返回默认值
   if (repdefine.default) {
     return repdefine.default;
