@@ -8,7 +8,7 @@ const { Random } = require('mockjs');
 const fs = require('fs');
 
 // 微服务入口路径
-const servicesPath = helper.pathJoin(__dirname, 'services');
+const servicesPath = helper.pathJoin(process.cwd(), 'services');
 
 const logger = new Logger('Main');
 const httpServer = new HttpServer();
