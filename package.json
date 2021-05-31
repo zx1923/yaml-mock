@@ -25,7 +25,7 @@
   "bin": "start.js",
   "pkg": {
     "targets": [
-      "node12-win-x64"
+      "node14-macos-x64"
     ],
     "outputPath": "dist"
   }
